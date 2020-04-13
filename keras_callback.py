@@ -1,7 +1,6 @@
-from keras.callbacks import Callback
-import keras.backend as K
-import numpy as np
-import matplotlib.pyplot as plt
+from tensorflow.keras.callbacks import Callback
+import tensorflow.keras.backend as K
+
 
 class LRFinder(Callback):
     def __init__(self, min_lr, max_lr, mom=0.9, stop_multiplier=None, 
@@ -23,9 +22,9 @@ class LRFinder(Callback):
             n_iterations = p['epochs']*p['samples']//p['batch_size']
         except:
             n_iterations = p['steps']*p['epochs']
-            
+        print(self.min_lr,self.max_lr,n_iterations//self.batches_lr_update+1)
         self.learning_rates = np.geomspace(self.min_lr, self.max_lr, \
-                                           num=n_iterations//self.batches_lr_update+1)
+                                           num=int(n_iterations//self.batches_lr_update+1))
         self.losses=[]
         self.iteration=0
         self.best_loss=0
