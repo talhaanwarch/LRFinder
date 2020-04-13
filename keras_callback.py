@@ -22,7 +22,6 @@ class LRFinder(Callback):
             n_iterations = p['epochs']*p['samples']//p['batch_size']
         except:
             n_iterations = p['steps']*p['epochs']
-        print(self.min_lr,self.max_lr,n_iterations//self.batches_lr_update+1)
         self.learning_rates = np.geomspace(self.min_lr, self.max_lr, \
                                            num=int(n_iterations//self.batches_lr_update+1))
         self.losses=[]
